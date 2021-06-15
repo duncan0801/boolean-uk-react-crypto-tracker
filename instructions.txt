@@ -4,12 +4,12 @@
 - Display the Side List with each one of the coins
     - ✔ You will have to use a fetch to the CRIPTO_LIST URL
     - ✔ Use the SideListItem component to display each individual item
-    - When you click on a coin, you should display its info in the Main Section
+    - ✔ When you click on a coin, you should display its info in the Main Section
 - Display the Main Section
-    - You should display here the info of the selected coin from the Side List
+    - ✔ You should display here the info of the selected coin from the Side List
 - Display the News Section
-    - You will have to use a fetch to the STATUS_UPDATES URL
-    - Use the NewsCard to display each news item
+    - ✔ You will have to use a fetch to the STATUS_UPDATES URL
+    - ✔ Use the NewsCard to display each news item
 - Finish the Main Section
     - Display the time that has passed since the coin data was updated on the server
     - To achieve this, use the last_updated key from each Coin Item object together with a setInterval

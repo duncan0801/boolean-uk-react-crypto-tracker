@@ -25,7 +25,7 @@ function MainDetail({selectedCripto}) {
         </div>
         <div className="main-detail__name">
           <h2>{capitliseWord(selectedCripto.id)}</h2>
-          <p><span class="small">a.k.a </span>{selectedCripto.symbol}</p>
+          <p><span className="small">a.k.a </span>{selectedCripto.symbol}</p>
         </div>
         <div className="main-detail__price">
         <p>{`£${selectedCripto["current_price"]}`}</p>

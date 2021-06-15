@@ -73,13 +73,12 @@ function App() {
           selectedCripto={selectedCripto}
           />
           : "Select a coin bro!"}
-    
-          {
-          statusUpdates.map(update => {
-            return <NewsCard
-            newsItem={update} /> 
-          })}
-      
+          <ul>
+            {statusUpdates.map(update => {
+              return <NewsCard
+              newsItem={update} /> 
+            })}
+          </ul>
       </main>
     </>
   );
