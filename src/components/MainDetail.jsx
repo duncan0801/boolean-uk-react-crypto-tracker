@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getCriptoUpdateUrl } from "../constants";
 
 // This function give us the current time in seconds
-function currentTime() {
+function getCurrentTime() {
   return Math.round(Date.now() / 1000);
 }
 /*
@@ -18,8 +18,16 @@ function convertToSeconds(dateValue) {
 
 function MainDetail({selectedCripto, cryptoList}) {
 
-    let foundCoin = cryptoList.find(coin => coin.id === selectedCripto)
+  const [currentTime, setCurrentTime] = useState(getCurrentTime())
+  let foundCoin = cryptoList.find(coin => coin.id === selectedCripto)
     console.log(foundCoin)
+  const timeDifference = currentTime - convertToSeconds(foundCoin["last_updated"])
+
+  useEffect(() => {
+    setInterval(()=> setCurrentTime(getCurrentTime()), 1000)
+  }, [timeDifference])
+
+    
   
   return (
     <>
@@ -33,7 +41,7 @@ function MainDetail({selectedCripto, cryptoList}) {
         </div>
         <div className="main-detail__price">
         <p>{`£${foundCoin["current_price"]}`}</p>
-        <p>{`Last updated at ${foundCoin["last_updated"]}`}</p>
+        <p>{`Last updated ${timeDifference} seconds ago`}</p>
         </div>
       </section>
     </>
