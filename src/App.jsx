@@ -51,7 +51,7 @@ function App() {
   function isSelectedCripto(id) {
     return selectedCripto === id;
   }
-  console.log(statusUpdates)
+
   return (
     /* These (<> </>) are called React Fragments, and allow us to return more than one top element */
     <>
@@ -71,6 +71,7 @@ function App() {
         {selectedCripto
           ? <MainDetail
           selectedCripto={selectedCripto}
+          cryptoList={cryptoList}
           />
           : "Select a coin bro!"}
           <ul>

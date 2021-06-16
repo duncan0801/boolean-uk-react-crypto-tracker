@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { getCriptoUpdateUrl } from "../constants";
-import {capitliseWord} from "../helpers"
+
 // This function give us the current time in seconds
 function currentTime() {
   return Math.round(Date.now() / 1000);
 }
-
 /*
   Use this function with the updated_at timestamp you get from each coin item in the API response
  */
@@ -16,7 +15,12 @@ function convertToSeconds(dateValue) {
     : dateValue;
 }
 
-function MainDetail({selectedCripto}) {
+
+function MainDetail({selectedCripto, cryptoList}) {
+
+    let foundCoin = cryptoList.find(coin => coin.id === selectedCripto)
+    console.log(foundCoin)
+  
   return (
     <>
       <section className="main-detail__central">
@@ -24,12 +28,12 @@ function MainDetail({selectedCripto}) {
           {/* This part is for the challenge */}
         </div>
         <div className="main-detail__name">
-          <h2>{capitliseWord(selectedCripto.id)}</h2>
-          <p><span className="small">a.k.a </span>{selectedCripto.symbol}</p>
+          <h2>{foundCoin.name}</h2>
+          <p><span className="small">a.k.a </span>{foundCoin.symbol}</p>
         </div>
         <div className="main-detail__price">
-        <p>{`£${selectedCripto["current_price"]}`}</p>
-        <p>{`Last updated at ${selectedCripto["last_updated"]}`}</p>
+        <p>{`£${foundCoin["current_price"]}`}</p>
+        <p>{`Last updated at ${foundCoin["last_updated"]}`}</p>
         </div>
       </section>
     </>
