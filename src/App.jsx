@@ -36,7 +36,7 @@ function App() {
     return fetch(STATUS_UPDATES)
             .then(response => response.json())
             .then(data => {
-              setStatusUpdates(data["status_updates"])
+              setStatusUpdates(data.status_updates)
             })
   }
 
@@ -61,7 +61,7 @@ function App() {
             
             return ( < CryptoListItem 
             coin={coin} 
-            index={index}
+            key={index}
             isSelectedCripto={isSelectedCripto} setSelectedCripto= {setSelectedCripto} />
             )
           })}
@@ -72,11 +72,13 @@ function App() {
           ? <MainDetail
           selectedCripto={selectedCripto}
           cryptoList={cryptoList}
+          setCryptoList={setCryptoList}
           />
           : "Select a coin bro!"}
           <ul>
-            {statusUpdates.map(update => {
+            {statusUpdates.map((update, index) => {
               return <NewsCard
+              key={index}
               newsItem={update} /> 
             })}
           </ul>

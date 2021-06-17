@@ -16,18 +16,41 @@ function convertToSeconds(dateValue) {
 }
 
 
-function MainDetail({selectedCripto, cryptoList}) {
+function MainDetail({selectedCripto, setCryptoList,  cryptoList}) {
 
   const [currentTime, setCurrentTime] = useState(getCurrentTime())
+  const [updated, setUpdated] = useState({})
   let foundCoin = cryptoList.find(coin => coin.id === selectedCripto)
-    console.log(foundCoin)
   const timeDifference = currentTime - convertToSeconds(foundCoin["last_updated"])
 
   useEffect(() => {
     setInterval(()=> setCurrentTime(getCurrentTime()), 1000)
   }, [timeDifference])
 
-    
+  useEffect(() => {
+    setInterval(() => {
+      fetch(getCriptoUpdateUrl(foundCoin.id))
+        .then((res) => res.json())
+        .then((data) => {
+          let id = Object.keys(data)[0]
+          const {gbp, last_updated_at } = data[id]
+
+          
+          // const cryptoIndex = cryptoList.findIndexOf(selectedCripto)
+          // if(selectedCripto.id.current_price !== gbp) {
+          //   setCryptoList([...cryptoList, ...cryptoList[cryptoIndex],  id.current_price ===  gbp])
+          //   console.log(selectedCripto.id.current_price)
+          //   console.log("price change!")
+          //}
+          
+        }
+        )
+    }, 5000);
+      
+        // let id = foundCoin.id
+        // updated.id.gbp !== foundCoin["current_price"] ? console.log("true") : console.log("false")
+
+  }, [foundCoin["current_price"]])
   
   return (
     <>

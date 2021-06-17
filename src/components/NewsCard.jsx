@@ -13,8 +13,8 @@ export default function NewsCard({ newsItem: { description } }) {
       <p>
         {description
           .split(/(https?:\/\/.*\b\/?)/g)
-          .map(match =>
-            /https?/.test(match) ? <NewsLink url={match} /> : match
+          .map((match, index) =>
+            /https?/.test(match) ? <NewsLink key={index} url={match} /> : match
           )}
       </p>
     </article>

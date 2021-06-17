@@ -1,9 +1,8 @@
 
 
-function CryptoListItem({coin, isSelectedCripto, setSelectedCripto, index }) {
+function CryptoListItem({coin, isSelectedCripto, setSelectedCripto}) {
     return (
         <li 
-        key={index} 
         >
             <button 
             className={isSelectedCripto(coin.id) ? "selected" : ""} 
