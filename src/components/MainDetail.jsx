@@ -19,13 +19,27 @@ function convertToSeconds(dateValue) {
 function MainDetail({selectedCripto, setCryptoList,  cryptoList}) {
 
   const [currentTime, setCurrentTime] = useState(getCurrentTime())
-  const [updated, setUpdated] = useState({})
+  const [secondsUntilUpdate, setSecondsUntilUpdate] = useState(10)
+  
   let foundCoin = cryptoList.find(coin => coin.id === selectedCripto)
   const timeDifference = currentTime - convertToSeconds(foundCoin["last_updated"])
 
   useEffect(() => {
     setInterval(()=> setCurrentTime(getCurrentTime()), 1000)
   }, [timeDifference])
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSecondsUntilUpdate(secondsUntilUpdate => secondsUntilUpdate - 1)
+    }, 1000)
+    return () => clearInterval(intervalId) //Has to retrun a fucntion for useEffect to clear up
+  }, [])
+
+  // PRICE UPDATE PROCESS
+  // HAVE A SET COUNTDOWM
+  // WHEN THE COUNTDOWN FINISHES, YOU FETCH THE PRICE CHANGE 
+  // GET THE PRICE CHANGE AND UPDATE THE CRYPTO LIST ARRAY
+  // Create an updated crypto List by mapping and saying if the id is correct then create a new object that has all the things from before plus the new data{...cryptoList, current_price: gbp, last_updated: last_updated_at}, if not then just retrun the item
 
   useEffect(() => {
     setInterval(() => {
@@ -56,7 +70,11 @@ function MainDetail({selectedCripto, setCryptoList,  cryptoList}) {
     <>
       <section className="main-detail__central">
         <div className="main-detail__update">
-          {/* This part is for the challenge */}
+        <div class="main-detail__update">
+          <p>{`next update in ${secondsUntilUpdate}`}</p>
+          <button class="main-detail__button">Pause update</button>
+        </div>
+
         </div>
         <div className="main-detail__name">
           <h2>{foundCoin.name}</h2>
